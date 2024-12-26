@@ -57,6 +57,10 @@ async function getChatHistory(filePath: string, projectName: string) {
                         };
                     });
                     currentChat.messages = currentChatBubbles;
+                    // 创建文件夹
+                    if (!fs.existsSync(`./${projectName}`)) {
+                        fs.mkdirSync(`./${projectName}`);
+                    }
                     fs.writeFileSync(`./${projectName}/${tab.chatTitle.length < 100 ? tab.chatTitle : "ChatTitle"}.json`, JSON.stringify(currentChat, null, 2));
                     return currentChat;
                 }
